@@ -49,18 +49,18 @@ def encrypt(plaintext, n):
 
 def decrypt(ciphertext):
     ciphertext = ciphertext.lower()
-    plaintext = ['']*25
+    plaintext = ['']*26
     print('Ciphertext: ' + ciphertext.upper())
-    for i in np.arange(1,25):
+    for i in np.arange(1,26):
         if is_r_prime(i) == True:
             this_inverse = find_inverse(i)
             for letter in ciphertext:
                 old_val = alph.index(letter)
                 new_val = (old_val*this_inverse)%26
                 new_letter = alph[new_val]
-                plaintext[i] += new_letter
-        if plaintext[i] != '':
-            print('Key '+ str(i) + ': ' + plaintext[i])
+                plaintext[i-1] += new_letter
+        if plaintext[i-1] != '':
+            print('Key '+ str(i) + ': ' + plaintext[i-1])
 
 this_plain_text = 'Hello world'
 this_cipher_text = 'JUDDSGSHDP'
