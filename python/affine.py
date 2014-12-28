@@ -31,6 +31,25 @@ def find_inverse(n):
         pass
     else:
         return this_inverse
+    
+def get_r_primes():
+    r_primes = []
+    for i in np.arange(1, 26):
+        if is_r_prime(i):
+            r_primes.append(i)
+    return r_primes
+    
+def find_a(y, x, b):
+    # y = ax + b
+    r_primes = get_r_primes()
+    for a in r_primes:
+        #print('a: ' + str(a) + ', x: ' + str(x) + ', y: ' + str(y) + ', b: ' + str(b))
+        #print((a*x)%26)
+        #print((y-b)%26)
+        if (a*x)%26 == (y-b)%26:
+            this_a = a
+            return this_a
+    return 0
 
 def encrypt(plaintext, a, b):
     if not is_r_prime(a):
@@ -77,7 +96,13 @@ def decrypt_trial(ciphertext):
                 print('A '+ str(a) + ', B: ' + str(b) + ': ' + plaintext[a-1][b-1])
 
 ciphertext = 'YJYN CDYN XDYO KYX XG UWFFBY EMDGGB EGUY MDWBFLYN LYUAWN QNEQLY CDYXDYL EANXA MBAQE YVWEXE'
+ciphertext2 = 'V TJXCS CVRD PJX MJ MDCC ND TKDY PJX LQD CDLIVYZ BJ MKLM V HLY HLCC L MLEV'
+plaintext = 'I would like you to tell me when you are leaving so that I can call a taxi'
 this_ciphertext = ''.join(i for i in ciphertext.lower() if i in alph)
+this_ciphertext2 = ''.join(i for i in ciphertext2.lower() if i in alph)
 #print(this_ciphertext)
 
-decrypt_trial(this_ciphertext)
+#encrypt(plaintext, 11, 11)
+#decrypt_trial(this_ciphertext2)
+a = find_a(21, 8, 11)
+print(a)
